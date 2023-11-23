@@ -13,8 +13,8 @@ import (
 
 const (
 	_defaultWaitTime = 5 * time.Second
-	_defaultAttempts = 10
-	_defaultTimeout  = 2 * time.Second
+	_defaultAttempts = 20
+	_defaultTimeout  = 5 * time.Second
 )
 
 // CallHandler -.

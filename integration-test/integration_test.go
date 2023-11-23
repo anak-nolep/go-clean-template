@@ -16,7 +16,9 @@ const (
 	// Attempts connection
 	host       = "app:8080"
 	healthPath = "http://" + host + "/healthz"
-	attempts   = 20
+
+	_defaultAttempts = 20
+	_defaultTimeout  = 5 * time.Second
 
 	// HTTP REST
 	basePath = "http://" + host + "/v1"
@@ -29,7 +31,7 @@ const (
 )
 
 func TestMain(m *testing.M) {
-	err := healthCheck(attempts)
+	err := healthCheck(_defaultAttempts)
 	if err != nil {
 		log.Fatalf("Integration tests: host %s is not available: %s", host, err)
 	}
@@ -40,20 +42,20 @@ func TestMain(m *testing.M) {
 	os.Exit(code)
 }
 
-func healthCheck(attempts int) error {
+func healthCheck(_defaultAttempts int) error {
 	var err error
 
-	for attempts > 0 {
+	for _defaultAttempts > 0 {
 		err = Do(Get(healthPath), Expect().Status().Equal(http.StatusOK))
 		if err == nil {
 			return nil
 		}
 
-		log.Printf("Integration tests: url %s is not available, attempts left: %d", healthPath, attempts)
+		log.Printf("Integration tests: url %s is not available, attempts left: %d", healthPath, _defaultAttempts)
 
-		time.Sleep(time.Second)
+		time.Sleep(_defaultTimeout)
 
-		attempts--
+		_defaultAttempts--
 	}
 
 	return err
@@ -72,7 +74,7 @@ func TestHTTPDoTranslate(t *testing.T) {
 		Send().Headers("Content-Type").Add("application/json"),
 		Send().Body().String(body),
 		Expect().Status().Equal(http.StatusOK),
-		Expect().Body().JSON().JQ(".translation").Equal("text for translation"),
+		Expect().Body().JSON().JQ(".translation").Equal("text to be translated"),
 	)
 
 	body = `{

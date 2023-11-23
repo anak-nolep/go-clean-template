@@ -19,7 +19,7 @@ var ErrConnectionClosed = errors.New("rmq_rpc client - Client - RemoteCall - Con
 const (
 	_defaultWaitTime = 5 * time.Second
 	_defaultAttempts = 10
-	_defaultTimeout  = 2 * time.Second
+	_defaultTimeout  = 3 * time.Second
 )
 
 // Message -.

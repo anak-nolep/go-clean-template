@@ -8,6 +8,9 @@ import (
 )
 
 func main() {
+	log.Println("Starting ...")
+	
+	log.Println("Loading configuration")
 	// Configuration
 	cfg, err := config.NewConfig()
 	if err != nil {
@@ -15,5 +18,6 @@ func main() {
 	}
 
 	// Run
+	log.Println("Running")
 	app.Run(cfg)
 }

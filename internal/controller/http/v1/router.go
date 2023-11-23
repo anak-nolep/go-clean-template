@@ -34,6 +34,10 @@ func NewRouter(handler *gin.Engine, l logger.Interface, t usecase.Translation) {
 	// K8s probe
 	handler.GET("/healthz", func(c *gin.Context) { c.Status(http.StatusOK) })
 
+	handler.GET("/ping", func(c *gin.Context) {
+		c.String(http.StatusOK, "ping")
+	})
+
 	// Prometheus metrics
 	handler.GET("/metrics", gin.WrapH(promhttp.Handler()))
 

@@ -28,9 +28,19 @@ swag-v1: ### swag init
 	swag init -g internal/controller/http/v1/router.go
 .PHONY: swag-v1
 
-run: swag-v1 ### swag run
-	go mod tidy && go mod download && \
-	DISABLE_SWAGGER_HTTP_HANDLER='' GIN_MODE=debug CGO_ENABLED=0 go run -tags migrate ./cmd/app
+.prepare: swag-v1
+	go mod tidy 
+	go mod download
+
+export DISABLE_SWAGGER_HTTP_HANDLER=''
+export GIN_MODE=debug
+export CGO_ENABLED=0
+
+build: .prepare ### run build
+	go build -tags migrate -o ./bin/ ./cmd/app
+
+run: .prepare ### swag run
+	go run -tags migrate ./cmd/app
 .PHONY: run
 
 docker-rm-volume: ### remove docker volume
@@ -38,7 +48,7 @@ docker-rm-volume: ### remove docker volume
 .PHONY: docker-rm-volume
 
 linter-golangci: ### check by golangci linter
-	golangci-lint run
+	golangci-lint run -v ./cmd/app/main.go
 .PHONY: linter-golangci
 
 linter-hadolint: ### check by hadolint linter
@@ -70,5 +80,7 @@ migrate-up: ### migration up
 .PHONY: migrate-up
 
 bin-deps:
-	GOBIN=$(LOCAL_BIN) go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
-	GOBIN=$(LOCAL_BIN) go install github.com/golang/mock/mockgen@latest
+	go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+	go install go.uber.org/mock/mockgen@latest
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest ### not recomended in wiki
+	go install github.com/swaggo/swag/cmd/swag@latest
