@@ -4,9 +4,6 @@ export
 LOCAL_BIN:=$(CURDIR)/bin
 PATH:=$(LOCAL_BIN):$(PATH)
 
-# HELP =================================================================================================================
-# This will output the help for each task
-# thanks to https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 .PHONY: help
 
 help: ## Display this help screen
@@ -29,12 +26,16 @@ swag-v1: ### swag init
 .PHONY: swag-v1
 
 .prepare: swag-v1
+	DISABLE_SWAGGER_HTTP_HANDLER=''
+	GIN_MODE=debug
+	CGO_ENABLED=0
 	go mod tidy 
 	go mod download
 
-export DISABLE_SWAGGER_HTTP_HANDLER=''
-export GIN_MODE=debug
-export CGO_ENABLED=0
+test: ### run test
+	CGO=1
+	go test -v -cover -race ./internal/...
+.PHONY: test
 
 build: .prepare ### run build
 	go build -tags migrate -o ./bin/ ./cmd/app
@@ -48,7 +49,7 @@ docker-rm-volume: ### remove docker volume
 .PHONY: docker-rm-volume
 
 linter-golangci: ### check by golangci linter
-	golangci-lint run -v ./cmd/app/main.go
+	golangci-lint run
 .PHONY: linter-golangci
 
 linter-hadolint: ### check by hadolint linter
@@ -58,10 +59,6 @@ linter-hadolint: ### check by hadolint linter
 linter-dotenv: ### check by dotenv linter
 	dotenv-linter
 .PHONY: linter-dotenv
-
-test: ### run test
-	go test -v -cover -race ./internal/...
-.PHONY: test
 
 integration-test: ### run integration-test
 	go clean -testcache && go test -v ./integration-test/...

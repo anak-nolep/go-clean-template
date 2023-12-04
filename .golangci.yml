@@ -1,6 +1,6 @@
 linters-settings:
   gci:
-    local-prefixes: github.com/evrone/go-clean-template
+    local-prefixes: go-clean-template
   dupl:
     threshold: 100
   errorlint:
@@ -51,6 +51,14 @@ linters-settings:
   nolintlint:
     require-explanation: true
     require-specific: true
+  revive:
+    rules:
+      - name: dot-imports
+        severity: warning
+        disabled: true
+  stylecheck:
+    dot-import-whitelist:
+      - go-hit
 
 linters:
   disable-all: true
@@ -58,8 +66,6 @@ linters:
     - asciicheck
     - bodyclose
     - cyclop
-    - deadcode
-    - depguard
     - dogsled
     - dupl
     - durationcheck
@@ -69,11 +75,9 @@ linters:
     - exportloopref
     - forbidigo
     - funlen
-    - gci
     - gochecknoglobals
     - gochecknoinits
     - gocognit
-    - goconst
     - gocritic
     - gocyclo
     - godot
@@ -95,14 +99,12 @@ linters:
     - nestif
     - nlreturn
     - noctx
-    - nolintlint
     - paralleltest
     - predeclared
     - revive
     - rowserrcheck
     - sqlclosecheck
     - staticcheck
-    - structcheck
     - stylecheck
     - tparallel
     - thelper
@@ -110,7 +112,6 @@ linters:
     - unconvert
     - unparam
     - unused
-    - varcheck
     - wsl
     - whitespace
 

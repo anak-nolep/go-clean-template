@@ -4,10 +4,10 @@
 
 Clean Architecture template for Golang services
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/evrone/go-clean-template)](https://goreportcard.com/report/github.com/evrone/go-clean-template)
-[![License](https://img.shields.io/github/license/evrone/go-clean-template.svg)](https://github.com/evrone/go-clean-template/blob/master/LICENSE)
-[![Release](https://img.shields.io/github/v/release/evrone/go-clean-template.svg)](https://github.com/evrone/go-clean-template/releases/)
-[![codecov](https://codecov.io/gh/evrone/go-clean-template/branch/master/graph/badge.svg?token=XE3E0X3EVQ)](https://codecov.io/gh/evrone/go-clean-template)
+[![Go Report Card](https://goreportcard.com/badge/github.com/anak-nolep/go-clean-template)](https://goreportcard.com/report/github.com/anak-nolep/go-clean-template)
+[![License](https://img.shields.io/github/license/anak-nolep/go-clean-template.svg)](https://github.com/anak-nolep/go-clean-template/blob/master/LICENSE)
+[![Release](https://img.shields.io/github/v/release/anak-nolep/go-clean-template.svg)](https://github.com/anak-nolep/go-clean-template/releases/)
+[![codecov](https://codecov.io/gh/anak-nolep/go-clean-template/branch/master/graph/badge.svg?token=XE3E0X3EVQ)](https://codecov.io/gh/anak-nolep/go-clean-template)
 
 ## Overview
 The purpose of the template is to show:
@@ -17,7 +17,7 @@ The purpose of the template is to show:
 
 Using the principles of Robert Martin (aka Uncle Bob).
 
-[Go-clean-template](https://evrone.com/go-clean-template?utm_source=github&utm_campaign=go-clean-template) is created & supported by [Evrone](https://evrone.com/?utm_source=github&utm_campaign=go-clean-template).
+[Go-clean-template](https://anak-nolep.com/go-clean-template?utm_source=github&utm_campaign=go-clean-template) is created & supported by [anak-nolep](https://anak-nolep.com/?utm_source=github&utm_campaign=go-clean-template).
 
 ## Content
 - [Quick start](#quick-start)

@@ -3,12 +3,11 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"go-clean-template/pkg/logger"
+	rmqrpc "go-clean-template/pkg/rabbitmq/rmq_rpc"
 	"time"
 
-	"github.com/streadway/amqp"
-
-	"github.com/evrone/go-clean-template/pkg/logger"
-	rmqrpc "github.com/evrone/go-clean-template/pkg/rabbitmq/rmq_rpc"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 const (
@@ -109,6 +108,7 @@ func (s *Server) serveCall(d *amqp.Delivery) {
 }
 
 func (s *Server) publish(d *amqp.Delivery, body []byte, status string) {
+	//nolint:all
 	err := s.conn.Channel.Publish(d.ReplyTo, "", false, false,
 		amqp.Publishing{
 			ContentType:   "application/json",

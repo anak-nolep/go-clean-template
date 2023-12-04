@@ -3,8 +3,7 @@ package usecase
 import (
 	"context"
 	"fmt"
-
-	"github.com/evrone/go-clean-template/internal/entity"
+	"go-clean-template/internal/entity"
 )
 
 // TranslationUseCase -.
@@ -32,7 +31,7 @@ func (uc *TranslationUseCase) History(ctx context.Context) ([]entity.Translation
 }
 
 // Translate -.
-func (uc *TranslationUseCase) Translate(ctx context.Context, t entity.Translation) (entity.Translation, error) {
+func (uc *TranslationUseCase) Translate(_ context.Context, t entity.Translation) (entity.Translation, error) {
 	translation, err := uc.webAPI.Translate(t)
 	if err != nil {
 		return entity.Translation{}, fmt.Errorf("TranslationUseCase - Translate - s.webAPI.Translate: %w", err)

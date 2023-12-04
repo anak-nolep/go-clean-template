@@ -10,9 +10,9 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 
 	// Swagger docs.
-	_ "github.com/evrone/go-clean-template/docs"
-	"github.com/evrone/go-clean-template/internal/usecase"
-	"github.com/evrone/go-clean-template/pkg/logger"
+	_ "go-clean-template/docs"
+	"go-clean-template/internal/usecase"
+	"go-clean-template/pkg/logger"
 )
 
 // NewRouter -.
@@ -47,3 +47,4 @@ func NewRouter(handler *gin.Engine, l logger.Interface, t usecase.Translation) {
 		newTranslationRoutes(h, t, l)
 	}
 }
+

@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/streadway/amqp"
+	amqp "github.com/rabbitmq/amqp091-go"
 
-	rmqrpc "github.com/evrone/go-clean-template/pkg/rabbitmq/rmq_rpc"
+	rmqrpc "go-clean-template/pkg/rabbitmq/rmq_rpc"
 )
 
 // ErrConnectionClosed -.
@@ -96,7 +96,7 @@ func (c *Client) publish(corrID, handler string, request interface{}) error {
 		}
 	}
 
-	err = c.conn.Channel.Publish(c.serverExchange, "", false, false,
+	err = c.conn.Channel.Publish(c.serverExchange, "", false, false, //nolint:all
 		amqp.Publishing{
 			ContentType:   "application/json",
 			CorrelationId: corrID,

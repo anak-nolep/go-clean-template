@@ -3,13 +3,12 @@ package usecase_test
 import (
 	"context"
 	"errors"
+	"go-clean-template/internal/entity"
+	"go-clean-template/internal/usecase"
 	"testing"
 
-	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
-
-	"github.com/evrone/go-clean-template/internal/entity"
-	"github.com/evrone/go-clean-template/internal/usecase"
+	gomock "go.uber.org/mock/gomock"
 )
 
 var errInternalServErr = errors.New("internal server error")
