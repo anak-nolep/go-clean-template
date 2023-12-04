@@ -1,8 +1,6 @@
 module go-clean-template
 
-go 1.21
-
-toolchain go1.21.4
+go 1.21.4
 
 require (
 	github.com/Conight/go-googletrans v0.2.4

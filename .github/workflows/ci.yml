@@ -49,8 +49,11 @@ jobs:
     name: runner / check-dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '1.21.4'
+          check-latest: true
       - name: WriteGoList
         run: go list -json -m all > go.list
       - name: Nancy
@@ -62,9 +65,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v2
+      - uses: actions/setup-go@v4
         with:
-          go-version: 1.21.x
+          go-version: '1.21.4'
+          check-latest: true
 
       - name: Unit Tests
         run: "go test \
